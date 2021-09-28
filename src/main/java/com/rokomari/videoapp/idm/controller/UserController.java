@@ -1,5 +1,6 @@
 package com.rokomari.videoapp.idm.controller;
 
+import com.rokomari.videoapp.common.enums.AccountStatus;
 import com.rokomari.videoapp.common.utils.Defs;
 import com.rokomari.videoapp.idm.payload.User;
 import com.rokomari.videoapp.idm.payload.UserResponse;
@@ -35,8 +36,8 @@ public class UserController {
         ModelAndView mv = new ModelAndView(new RedirectView(req.getContextPath() + "/login"));
         String msg = "";
         try {
-            user.setUsername(user.getEmail());
-            user.setStatus(1);
+            user.setUsername(user.getEmail()); // username & email same
+            user.setStatus(AccountStatus.active.getValue()); // default active
             UserResponse response = userService.crateUser(user);
             if (response != null) {
                 msg = response.getMessage();
