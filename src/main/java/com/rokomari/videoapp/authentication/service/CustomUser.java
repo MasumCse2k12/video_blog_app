@@ -31,9 +31,10 @@ public class CustomUser extends User {
     private Boolean enabled;
     private boolean userActivated;
     
-    public CustomUser(String username, String password, String token, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUser(Integer userId,String username, String password, String token, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.token = token;
         this.userName = username;
+        this.userId = userId;
     }
 }

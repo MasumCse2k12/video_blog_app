@@ -1,0 +1,138 @@
+/* Responsiveness */
+
+@media (max-width:1500px) {
+    .main-wrapper .header h4 {
+        font-size: 1.2rem;
+        padding-top: 5px;
+    }
+}
+
+@media (max-width:1300px) {
+    .main-wrapper .header h4 {
+        font-size: 0.85rem;
+        padding-top: 5px;
+    }
+}
+
+@media (max-width:1100px) {
+    .main-wrapper .header h4 {
+        font-size: 0.75rem;
+        padding-top: 5px;
+    }
+
+    .header-title img {
+        height: 30px !important;
+    }
+
+    .main-wrapper .header p {
+        font-size: 75%;
+    }
+}
+
+@media (max-width:800px) {
+    .main-wrapper .header .header-title {
+        word-spacing: 0px;
+        letter-spacing: 0px;
+    }
+
+    .main-wrapper .header h4 {
+        font-size: 0.6rem;
+        padding-top: 7px;
+    }
+
+    .main-wrapper .header p {
+        font-size: 60%;
+    }
+
+    .content-main-header h5 {
+        font-size: 1rem !important;
+    }
+
+    .content-main-header .mt-1 {
+        margin-top: .35rem !important;
+    }
+
+    .main-header-button {
+        font-size: 70% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .statictics-circle {
+        margin-top: 5px;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .task-header {
+        margin-top: .5rem;
+    }
+
+
+
+    /* .bg-light {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    } */
+
+    /* .main-wrapper {
+        padding-top: 60px;
+    } */
+
+    .main-wrapper .service-section .section-content .higlighted-section h2,
+    .main-wrapper .service-section .section-content .higlighted-section p {
+        text-align: center;
+    }
+
+    footer .social-section {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .main-wrapper .about-us-section .section-content {
+        margin-top: 20px;
+        padding-left: 0;
+    }
+
+    .gallery-slider .slider-info h3,
+    .gallery-slider .slider-info h4,
+    .gallery-slider .slider-info p {
+        text-align: center;
+    }
+
+    .main-wrapper .container.contact-us-section {
+        padding: 25px;
+    }
+
+    .main-wrapper .contact-us-section .address {
+        margin-top: 30px;
+        text-align: left;
+        border-top: 2px solid #ddd;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-wrapper .about-us-section .section-description {
+        padding: 0;
+    }
+
+    .main-wrapper .about-section .section-description {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 420px) {
+    .main-wrapper .about-section .section-description {
+        padding: 0 5px;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-light .navbar-nav .nav-item {
+        margin-right: 20px;
+    }
+
+    .navbar-light .navbar-nav .nav-item:last-child {
+        margin-right: 0;
+    }
+}

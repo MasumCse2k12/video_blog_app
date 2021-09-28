@@ -16,43 +16,103 @@ function showGlobalLoader(state){
 $(document).ready(function () {
     // document.onmousemove = handleMouseMove;
 
-    function handleMouseMove(event) {
-        var eventDoc, doc, body;
+    $('[rel=tooltip]').tooltip({
+        trigger: "hover"
+    });
 
-        event = event || window.event; // IE-ism
+    $('[data-toggle="tooltip"]').click(function () {
+        $('[data-toggle="tooltip"]').tooltip("hide");
 
-        // If pageX/Y aren't available and clientX/Y are,
-        // calculate pageX/Y - logic taken from jQuery.
-        // (This is to support old IE)
-        if (event.pageX == null && event.clientX != null) {
-            eventDoc = (event.target && event.target.ownerDocument) || document;
-            doc = eventDoc.documentElement;
-            body = eventDoc.body;
+    });
 
-            event.pageX = event.clientX +
-                (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-                (doc && doc.clientLeft || body && body.clientLeft || 0);
-            event.pageY = event.clientY +
-                (doc && doc.scrollTop || body && body.scrollTop || 0) -
-                (doc && doc.clientTop || body && body.clientTop || 0);
-        }
+    $("#sidebarCollapse").on("click", function () {
+        //$("#sidebar").toggleClass("active");
+        $(this).toggleClass("active");
+    });
 
-        // Use event.pageX / event.pageY here
-        // Add a dot to follow the cursor
-        // dot = document.createElement('div');
-        // dot.className = "dot";
-        // dot.style.left = event.pageX + "px";
-        // dot.style.top = event.pageY + "px";
-        // document.body.appendChild(dot);
+    var myGroup = $('#sidebar');
+    myGroup.on('show.bs.collapse', '.collapse', function () {
+        myGroup.find('.collapse.in').collapse('hide');
+    });
 
-        // console.log('X Position: ', event.pageX, 'Y Position: ', event.pageY);
+    new WOW().init();
 
-        // console.log('Inner Height: ', window.innerHeight);
-
-        if ((window.innerHeight - event.pageY) < 200) {
-            console.log('200 from bottom');
-        }
-    }
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            boundary: 'window',
+            container: 'body'
+        });
+    })
 
 });
-// })();
+
+function displayBigMenu(menuState) {
+    if (menuState) {
+        $('.side-menu').css({
+            width: '240px'
+        });
+        $('.side-menu .side-bar a.menubutton').css({
+            width: '230px',
+            'text-align': 'left'
+        });
+        $('.side-menu .side-bar a.menubutton').attr('data-toggle', "");
+        $('.side-menu .side-bar a.menubutton').attr('title', "");
+        // $('.side-menu .side-bar a.menubutton').removeClass('btn-circle')
+        $('.closeMenuButton').css({
+            display: 'block'
+        });
+        $('.showMenuButton').css({
+            display: 'none'
+        });
+    } else {
+        $('.side-menu').css({
+            width: '60px'
+        });
+        $('.side-menu .side-bar a.menubutton').css({
+            width: '48px',
+            'text-align': 'center'
+        });
+        $('.side-menu .side-bar a.menubutton').attr('data-toggle', "tooltip");
+        // $('.side-menu .side-bar a.menubutton').addClass('btn-circle')
+        $('.closeMenuButton').css({
+            display: 'none'
+        });
+        $('.showMenuButton').css({
+            display: 'block'
+        });
+    }
+}
+
+function loadDynamicPage(page) {
+    // console.log(page);
+    var selectedPage = page + ".html";
+    if (page == '' || page == null) {
+        selectedPage = '404.html'
+    }
+    // console.log(selectedPage);
+    $("#content-wrapper").attr('src', selectedPage);
+}
+
+function signIn(state) {
+    if (state) {
+        $('.login-page').css({
+            'top': '-100%'
+        });
+    } else {
+        $('.login-page').css({
+            'top': '0'
+        });
+    }
+}
+
+
+// // When the user clicks on the button, scroll to the top of the document
+// $('#backToTop').on('click', function (e) {
+//     $("html, body").animate({
+//         scrollTop: $("body").offset().top
+//     }, 500);
+// });
+
+function back() {
+    window.history.back();
+}

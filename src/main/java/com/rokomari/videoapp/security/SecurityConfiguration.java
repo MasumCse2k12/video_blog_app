@@ -41,7 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/resources/**")
                 .antMatchers("/login/**")
-                .antMatchers("/dashboard/**")
+                .antMatchers("/user/**")
+                .antMatchers("/blog/**")
                 .antMatchers("/signout/**");
     }
 
@@ -53,10 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        http.addFilterBefore(filter, CsrfFilter.class);
 
         http.headers().httpStrictTransportSecurity().and().frameOptions().disable().xssProtection().and().cacheControl();
         http

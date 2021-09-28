@@ -7,19 +7,26 @@ package com.rokomari.videoapp.authentication.controller;
 
 
 import com.rokomari.videoapp.common.utils.Utils;
+import com.rokomari.videoapp.video.payload.VideoRequest;
+import com.rokomari.videoapp.video.payload.VideosResponse;
+import com.rokomari.videoapp.video.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +37,8 @@ public class AuthenticationController {
 
     @Autowired
     private ServletContext mcontext;
+    @Autowired
+    VideoService videoService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model, boolean error, @RequestParam(value = "msg", required = false) String errorMessage) throws Exception {
@@ -52,9 +61,27 @@ public class AuthenticationController {
         return "login";
     }
 
+    @RequestMapping(value = "/blog", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView blogPage(Model model) throws Exception {
+        ModelAndView mv = new ModelAndView("blog");
+        try{
+            mv.addObject("action", false);
+            VideosResponse response = videoService.videoSummary(new VideoRequest());
+            if(response != null && response.getVideosList() != null){
+                mv.addObject("videoList", response.getVideosList());
+            }else{
+                mv.addObject("videoList", new ArrayList<>());
+            }
+        }catch (Throwable t){
+            t.printStackTrace();
+        }
+        return mv;
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginPageRedirect(Model model) {
-        return "redirect:login";
+    public String blogPageRedirect(Model model) {
+        return "redirect:blog";
     }
 
 
